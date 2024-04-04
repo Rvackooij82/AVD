@@ -36,16 +36,16 @@ function Write-Log {
 Write-Host "START Region Configuration, files and fonts"
 if (!(Test-Path -Path "c:\_curtoso")) { New-Item -Path "C:\" -Name "_curtoso" -ItemType "Directory" -ErrorAction SilentlyContinue }
 
-# Wallpaper download (GPO Applied)
-$wallpaperUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/trident/Wallpaper-Proof3.jpg?sv=2020-08-04&st=2021-12-08T21%3A13%3A25Z&se=2025-12-09T21%3A13%3A00Z&sr=b&sp=r&sig=c5orrNpV%2FJExVq11NZjfSDqZF4Oc972wMQXvOq8AZJc%3D"
-$wallpaperPath = "C:\_curtoso\"
-Invoke-WebRequest -Uri $wallpaperUrl -OutFile $wallpaperPath -UseBasicParsing
+# # Wallpaper download (GPO Applied)
+# $wallpaperUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/trident/Wallpaper-Proof3.jpg?sv=2020-08-04&st=2021-12-08T21%3A13%3A25Z&se=2025-12-09T21%3A13%3A00Z&sr=b&sp=r&sig=c5orrNpV%2FJExVq11NZjfSDqZF4Oc972wMQXvOq8AZJc%3D"
+# $wallpaperPath = "C:\_curtoso\"
+# Invoke-WebRequest -Uri $wallpaperUrl -OutFile $wallpaperPath -UseBasicParsing
 
-# Screen saver download and extract (GPO Applied)
-$screensaverUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/trident/screensaver.zip?sv=2020-08-04&st=2021-12-08T21%3A14%3A31Z&se=2025-12-09T21%3A14%3A00Z&sr=b&sp=r&sig=YfbnE2tgH5buBlaUye%2B0%2BbnJc92Vib3LIJdnv6XuZOY%3D"
-$screensaverPath = "C:\deploy\screensaver.zip"
-Invoke-WebRequest -Uri $screensaverUrl -OutFile $screensaverPath -UseBasicParsing
-Expand-Archive -path "C:\deploy\screensaver.zip" -DestinationPath "C:\_trident\screensaver" 
+# # Screen saver download and extract (GPO Applied)
+# $screensaverUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/trident/screensaver.zip?sv=2020-08-04&st=2021-12-08T21%3A14%3A31Z&se=2025-12-09T21%3A14%3A00Z&sr=b&sp=r&sig=YfbnE2tgH5buBlaUye%2B0%2BbnJc92Vib3LIJdnv6XuZOY%3D"
+# $screensaverPath = "C:\deploy\screensaver.zip"
+# Invoke-WebRequest -Uri $screensaverUrl -OutFile $screensaverPath -UseBasicParsing
+# Expand-Archive -path "C:\deploy\screensaver.zip" -DestinationPath "C:\_trident\screensaver" 
 
 # Remove Quick Assist
 Remove-WindowsCapability -online -name App.Support.QuickAssist~~~~0.0.1.0
