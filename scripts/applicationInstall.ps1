@@ -162,6 +162,16 @@ catch {
 #############################################################################################
 Write-Host "START Region Install DotNet 3.5"
 # Enable Microsoft DotNet 3.5:
+$NetFx3AUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Microsoft/NetFx3/microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab?sv=2021-10-04&st=2023-04-15T20%3A26%3A36Z&se=2025-04-16T20%3A26%3A00Z&sr=b&sp=r&sig=QDi9CezcX149eSvgFxy37%2Fl32cPNqXJAg0dZPus1%2BuM%3D"
+if (!(Test-Path -Path "C:\deploy\NetFx3")) { New-Item -Path "C:\deploy" -Name "NetFx3" -ItemType "Directory" -ErrorAction SilentlyContinue }
+$NetFx3APath = "c:\deploy\NetFx3\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab"
+Invoke-WebRequest -Uri $NetFx3AUrl -OutFile $NetFx3APath -UseBasicParsing
+
+$NetFx3BUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Microsoft/NetFx3/Microsoft-Windows-NetFx3-OnDemand-Package~31bf3856ad364e35~amd64~en-US~.cab?sv=2021-10-04&st=2023-04-15T20%3A25%3A46Z&se=2025-04-16T20%3A25%3A00Z&sr=b&sp=r&sig=N8WHrV3ml6fGT3qCo3Qx78rCEZtDU6AIm8sLIFMoC8w%3D"
+if (!(Test-Path -Path "C:\deploy\NetFx3")) { New-Item -Path "C:\deploy" -Name "NetFx3" -ItemType "Directory" -ErrorAction SilentlyContinue }
+$NetFx3BPath = "c:\deploy\NetFx3\Microsoft-Windows-NetFx3-OnDemand-Package~31bf3856ad364e35~amd64~en-US~.cab"
+Invoke-WebRequest -Uri $NetFx3BUrl -OutFile $NetFx3BPath -UseBasicParsing
+
 Write-host "Enabled .NET 3.5"
 try {
     DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:c:\deploy\NetFx3
