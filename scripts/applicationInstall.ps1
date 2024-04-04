@@ -4,13 +4,13 @@
 #
 # CREATE LOCAL FOLDERS FOR SOFTWARE AND TOOLS
 # APPLICATIONS TO INSTALL:
+# - Java JRE x64 & x86                              (Coris website TCAY)
 # - 7Zip                                            (General)
 # - DotNet 3.5                                      (Not sure which application requires this)
 # - Microsoft 365 Apps for Enterprise + Version     (General)
 # - Install Microsoft teams                         (General)
 # - Adobe Reader DC                                 (General)
 # - Google Chrome Enterprise                        (General)
-# - Microsoft ToDo                                  (General)
 
 #############################################################################################
 # START Region Set Stage for download and Logging
@@ -36,17 +36,6 @@ function Write-Log {
 Write-Host "START Region Configuration, files and fonts"
 if (!(Test-Path -Path "c:\_curtoso")) { New-Item -Path "C:\" -Name "_curtoso" -ItemType "Directory" -ErrorAction SilentlyContinue }
 
-# # Wallpaper download (GPO Applied)
-# $wallpaperUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/trident/Wallpaper-Proof3.jpg?sv=2020-08-04&st=2021-12-08T21%3A13%3A25Z&se=2025-12-09T21%3A13%3A00Z&sr=b&sp=r&sig=c5orrNpV%2FJExVq11NZjfSDqZF4Oc972wMQXvOq8AZJc%3D"
-# $wallpaperPath = "C:\_curtoso\"
-# Invoke-WebRequest -Uri $wallpaperUrl -OutFile $wallpaperPath -UseBasicParsing
-
-# # Screen saver download and extract (GPO Applied)
-# $screensaverUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/trident/screensaver.zip?sv=2020-08-04&st=2021-12-08T21%3A14%3A31Z&se=2025-12-09T21%3A14%3A00Z&sr=b&sp=r&sig=YfbnE2tgH5buBlaUye%2B0%2BbnJc92Vib3LIJdnv6XuZOY%3D"
-# $screensaverPath = "C:\deploy\screensaver.zip"
-# Invoke-WebRequest -Uri $screensaverUrl -OutFile $screensaverPath -UseBasicParsing
-# Expand-Archive -path "C:\deploy\screensaver.zip" -DestinationPath "C:\_trident\screensaver" 
-
 # Remove Quick Assist
 Remove-WindowsCapability -online -name App.Support.QuickAssist~~~~0.0.1.0
 #############################################################################################
@@ -62,6 +51,7 @@ if (!(Test-Path -Path "c:\tools\sysinternals")) { New-Item -Path "c:\tools\sysin
 $LocalPath = "c:\tools\sysinternals" 
 set-Location $LocalPath
 $appURL = "https://download.sysinternals.com/files/SysinternalsSuite.zip"
+# $appURL = 'https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Microsoft/SysinternalsSuite.zip?sv=2021-08-06&st=2022-12-19T20%3A06%3A55Z&se=2025-12-20T20%3A06%3A00Z&sr=b&sp=r&sig=6%2FgqnJZTqcfHV0TfJEj4gXpZt%2BbvZCS7g17ZJ0hSajo%3D'
 $appFile = 'SysinternalsSuite.zip'
 $outputPath = $LocalPath + '\' + $appFile
 Invoke-WebRequest -Uri $appURL -OutFile $outputPath
@@ -75,12 +65,12 @@ Expand-Archive -LiteralPath 'C:\\Tools\\sysinternals\\SysinternalsSuite.zip' -De
 ############################################################################################# 
 Write-Host "START Region Java JRE install (X86 and X64)"
 # Download Java JRE x64:
-$javax64downloadUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Java/jre-8u391-windows-x64.exe?sp=r&st=2023-10-25T20:16:05Z&se=2025-10-26T04:16:05Z&spr=https&sv=2022-11-02&sr=b&sig=1VC1hqURcRHIlDrFTNXk7ILaeNHbtHZh7IiwvbBOrT0%3D"
+$javax64downloadUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Java/jre-8u401-windows-x64.exe?sp=r&st=2024-02-14T18:14:08Z&se=2026-02-15T02:14:08Z&spr=https&sv=2022-11-02&sr=b&sig=la7OLxUOKCMN4dzuJCgEuS4%2FFW44SkHQg6r5thV%2F%2BRw%3D"
 if (!(Test-Path -Path "C:\deploy\java")) { New-Item -Path "C:\deploy" -Name "java" -ItemType "Directory" -ErrorAction SilentlyContinue }
 $javax64InstallPath = "c:\deploy\java\jre-windows-x64.exe"
 Invoke-WebRequest -Uri $javax64downloadUrl -OutFile $javax64InstallPath -UseBasicParsing
 # Download Java JRE x86:
-$javax86downloadUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Java/jre-8u391-windows-i586.exe?sp=r&st=2023-10-25T20:15:17Z&se=2025-10-26T04:15:17Z&spr=https&sv=2022-11-02&sr=b&sig=3YZ9qFZzDEynQYWYcMdWYlg16ylSS3H9LvF5aStBM4k%3D"
+$javax86downloadUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Java/jre-8u401-windows-i586.exe?sp=r&st=2024-02-14T18:14:50Z&se=2026-02-15T02:14:50Z&spr=https&sv=2022-11-02&sr=b&sig=1rPuD%2FyGb26HIoEu80PHyU3rGe7IXJKdNgBVOraclMo%3D"
 if (!(Test-Path -Path "C:\deploy\java")) { New-Item -Path "C:\deploy" -Name "java" -ItemType "Directory" -ErrorAction SilentlyContinue }
 $javax86InstallPath = "c:\deploy\java\jre-windows-i586.exe"
 Invoke-WebRequest -Uri $javax86downloadUrl -OutFile $javax86InstallPath -UseBasicParsing
@@ -289,6 +279,7 @@ catch {
 
 # Download the Teams WebSocket Service:
 $MsRdcWebRTCSvcDownloadUrl="https://aka.ms/msrdcwebrtcsvc/msi"
+# $MsRdcWebRTCSvcDownloadUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Microsoft/MsRdcWebRTCSvc_HostSetup_1.31.2211.15001_x64.msi?sv=2021-10-04&st=2023-02-14T21%3A40%3A10Z&se=2025-02-15T21%3A40%3A00Z&sr=b&sp=r&sig=7SEDmN3%2B7oJ2t7u3IyvR8FFWBh46t0C7l0N5cGWS3zg%3D"
 if (!(Test-Path -Path "C:\deploy\Teams")) { New-Item -Path "C:\deploy" -Name "Teams" -ItemType "Directory" -ErrorAction SilentlyContinue }
 $MsRdcWebRTCSvcInstallPath = "c:\deploy\Teams\MsRdcWebRTCSvc_HostSetup.msi"
 Invoke-WebRequest -Uri $MsRdcWebRTCSvcDownloadUrl -OutFile $MsRdcWebRTCSvcInstallPath -UseBasicParsing
@@ -313,6 +304,7 @@ catch {
 
 # Download Microsoft Teams:
 $MsTeamsDownloadUrl="https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true"
+# $MsTeamsDownloadUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Microsoft/Teams_windows_x64.msi?sv=2021-08-06&st=2022-11-15T08%3A54%3A52Z&se=2023-11-16T08%3A54%3A00Z&sr=b&sp=r&sig=0Psh9R3C8Tb8sA6xPRvKGmDAsbVYcDkBgojke30ZAPE%3D"
 if (!(Test-Path -Path "C:\deploy\Teams")) { New-Item -Path "C:\deploy" -Name "Teams" -ItemType "Directory" -ErrorAction SilentlyContinue }
 $MsTeamsInstallPath = "c:\deploy\Teams\Teams_windows_x64.msi"
 Invoke-WebRequest -Uri $MsTeamsDownloadUrl -OutFile $MsTeamsInstallPath -UseBasicParsing
@@ -344,7 +336,7 @@ catch {
 Write-Host "START Region Adobe Reader DC "
 # Download Adobe Reader DC:
 # https://get.adobe.com/nl/reader/enterprise/
-$adobeInstallUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Adobe/AcroRdrDC2300620320_en_US.exe?sv=2021-10-04&st=2023-09-18T08%3A23%3A20Z&se=2025-09-19T08%3A23%3A00Z&sr=b&sp=r&sig=7eBuFfrO4wt3knp%2Bsz2aQYhNQzv33UhByGuLEZ%2BIbsE%3D"
+$adobeInstallUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Adobe/AcroRdrDC2300820555_en_US.exe?sp=r&st=2024-03-07T20:08:17Z&se=2026-03-08T04:08:17Z&spr=https&sv=2022-11-02&sr=b&sig=onkIZ%2Fn8ttnWSqQ6Imj8SBXMQ%2F2hz87Si1YfxVKQX%2Fo%3D"
 if (!(Test-Path -Path "C:\deploy\AdobeReaderDC")) { New-Item -Path "C:\deploy" -Name "AdobeReaderDC" -ItemType "Directory" -ErrorAction SilentlyContinue }
 $adobeInstallPath = "c:\deploy\AdobeReaderDC\AcroRdrDC.exe"
 Invoke-WebRequest -Uri $adobeInstallUrl -OutFile $adobeInstallPath -UseBasicParsing
@@ -376,7 +368,7 @@ catch {
 ############################################################################################# 
 Write-Host "START Region Google Chrome Enterprise"
 # Download Google Chrome Enterprise:
-$chromeInstallUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Google/GoogleChromeStandaloneEnterprise64.msi?sp=r&st=2023-11-13T15:15:25Z&se=2026-11-13T23:15:25Z&spr=https&sv=2022-11-02&sr=b&sig=%2Bo5DuTdmOWxlDuWQ47VNRAOO9Z7AS9hU9JH48gmIc2Y%3D"
+$chromeInstallUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Google/googlechromestandaloneenterprise64-122-0-6261-1111.msi?sp=r&st=2024-03-07T20:11:53Z&se=2026-03-08T04:11:53Z&spr=https&sv=2022-11-02&sr=b&sig=vZ3Lx%2BO1HnoJyoMOTMbJ4xVlUhf4xnEgEZMo9kFiA3M%3D"
 if (!(Test-Path -Path "C:\deploy\Google")) { New-Item -Path "C:\deploy" -Name "Google" -ItemType "Directory" -ErrorAction SilentlyContinue }
 $chromeInstallPath = "c:\deploy\Google\googlechromestandaloneenterprise64.msi"
 Invoke-WebRequest -Uri $chromeInstallUrl -OutFile $chromeInstallPath -UseBasicParsing
@@ -401,23 +393,6 @@ catch {
 }
 #############################################################################################
 # END Region Google Chrome Enterprise
-#############################################################################################
-
-#############################################################################################
-# START Region Microsoft ToDo 2.57.43142.0
-#############################################################################################
-Write-Host "START Region Microsoft ToDo 2.57.43142.0"
-# Download Microsoft ToDo Zip:
-$ToDoUrl="https://tcarwvdinfrasa.blob.core.windows.net/aib-tcar-win10-21h1-prod/Microsoft/MicrosoftToDo.zip?sv=2021-08-06&st=2022-12-19T20%3A11%3A28Z&se=2025-12-20T20%3A11%3A00Z&sr=b&sp=r&sig=Ubf2BXZgHt3BiLCwHML%2F7Byc%2FimUHHpPOAC%2BYFPai4Q%3D"
-if (!(Test-Path -Path "C:\deploy\MicrosoftToDo")) { New-Item -Path "C:\deploy" -Name "MicrosoftToDo" -ItemType "Directory" -ErrorAction SilentlyContinue }
-$ToDoPath = "c:\deploy\MicrosoftToDo\MicrosoftToDo.zip"
-Invoke-WebRequest -Uri $ToDoUrl -OutFile $ToDoPath -UseBasicParsing
-Expand-Archive -path "c:\deploy\MicrosoftToDo\MicrosoftToDo.zip" -DestinationPath "c:\deploy\MicrosoftToDo" -Force
-
-DISM /Online /Add-ProvisionedAppxPackage /PackagePath:c:\deploy\MicrosoftToDo\Microsoft.Todos_2.108.62932.0_neutral_~_8wekyb3d8bbwe.Msixbundle /DependencyPackagePath:c:\deploy\MicrosoftToDo\Microsoft.VCLibs.140.00_14.0.32530.0_x64__8wekyb3d8bbwe.Appx /DependencyPackagePath:c:\deploy\MicrosoftToDo\Microsoft.NET.Native.Framework.2.2_2.2.29512.0_x64__8wekyb3d8bbwe.Appx /DependencyPackagePath:c:\deploy\MicrosoftToDo\Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx /DependencyPackagePath:c:\deploy\MicrosoftToDo\Microsoft.UI.Xaml.2.8_8.2310.30001.0_x64__8wekyb3d8bbwe.Appx /SkipLicense /region="all"
-
-#############################################################################################
-# END Region Microsoft ToDo 2.57.43142.0
 #############################################################################################
 
 #############################################################################################
